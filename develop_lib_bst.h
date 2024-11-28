@@ -75,7 +75,7 @@ public:
             }
         }
         return false; 
-
+    }
     
     bool searchR(int k) {
         if (k == this->data) {
