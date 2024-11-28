@@ -4,30 +4,28 @@ using namespace std;
 
 class Node {
 private:
-    int data;        // Valore del nodo
-    int weight;      // Peso del nodo (non usato in questa versione)
-    Node* lchild;    // Puntatore al figlio sinistro
-    Node* rchild;    // Puntatore al figlio destro
+    int data;        
+    int weight;      
+    Node* lchild;    
+    Node* rchild;    
 
 public:
-    // Costruttore
+    
     Node(int k, int w = 0) : data(k), weight(w), lchild(nullptr), rchild(nullptr) {}
 
-    // Inserimento ricorsivo
+   
     Node* insertR(int k) {
         if (k == this->data) {
-            return this; // Non si inseriscono duplicati
+            return this;
         }
 
         if (k < this->data) {
-            // Inserimento nel sottoalbero sinistro
             if (this->lchild == nullptr) {
                 this->lchild = new Node(k);
             } else {
                 this->lchild = this->lchild->insertR(k);
             }
         } else {
-            // Inserimento nel sottoalbero destro
             if (this->rchild == nullptr) {
                 this->rchild = new Node(k);
             } else {
@@ -38,23 +36,22 @@ public:
         return this;
     }
 
-    // Inserimento iterativo
     Node* insertI(int k) {
         Node* current = this;
         while (true) {
             if (k == current->data) {
-                return current; // Non si inseriscono duplicati
+                return current; 
             }
 
             if (k < current->data) {
-                // Scendi a sinistra
+             
                 if (current->lchild == nullptr) {
                     current->lchild = new Node(k);
                     return this;
                 }
                 current = current->lchild;
             } else {
-                // Scendi a destra
+
                 if (current->rchild == nullptr) {
                     current->rchild = new Node(k);
                     return this;
@@ -64,37 +61,35 @@ public:
         }
     }
 
-    // Ricerca iterativa
+
     bool searchI(int k) {
         Node* current = this;
         while (current != nullptr) {
             if (k == current->data) {
-                return true; // Nodo trovato
+                return true; 
             }
             if (k < current->data) {
-                current = current->lchild; // Vai a sinistra
+                current = current->lchild; 
             } else {
-                current = current->rchild; // Vai a destra
+                current = current->rchild;
             }
         }
-        return false; // Nodo non trovato
-    }
+        return false; 
 
-    // Ricerca ricorsiva
+    
     bool searchR(int k) {
         if (k == this->data) {
-            return true; // Nodo trovato
+            return true; 
         }
         if (k < this->data && this->lchild != nullptr) {
-            return this->lchild->searchR(k); // Cerca nel sottoalbero sinistro
+            return this->lchild->searchR(k); 
         }
         if (k > this->data && this->rchild != nullptr) {
-            return this->rchild->searchR(k); // Cerca nel sottoalbero destro
+            return this->rchild->searchR(k); 
         }
-        return false; // Nodo non trovato
+        return false; 
     }
 
-    // Attraversamento in ordine
     void inOrder() const {
         if (this->lchild != nullptr) {
             this->lchild->inOrder();
